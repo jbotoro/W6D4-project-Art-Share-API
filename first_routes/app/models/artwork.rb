@@ -11,6 +11,11 @@ class Artwork < ApplicationRecord
   through: :shared_artworks,
   source: :viewer
 
+  has_many :comments,
+  foreign_key: :artwork_id,
+  class_name: :Comment,
+  dependent: :destroy
+
   validates :title, :image_url, :artist_id, presence: true
   validates :title, uniqueness: true
 end
